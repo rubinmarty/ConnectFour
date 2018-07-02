@@ -63,6 +63,7 @@ view model =
                 , ("border-right", "25px solid transparent")
                 , ("border-top", "25px solid black")
                 , ("display", "inline-block")
+                , ("margin", "0px 1px")
                 ]
         button x =
             Html.div [buttonStyle, onClick (Move x)] []
@@ -75,26 +76,23 @@ view model =
                 [ ("width", "50px")
                 , ("height", "50px")
                 , ("display", "inline-block")
-                , ("background-color", "yellow")
-                ]
-        rowStyle =
-            style
-                [ ("display", "flex")
+                , ("margin", "1px")
                 ]
         color owner =
             case owner of
                 Nothing ->
-                    "grey"
+                    "#ABC"
                 Just False ->
                     "red"
                 Just True ->
-                    "blue"
+                    "yellow"
         circleStyle owner =
             style
                 [ ("width", "50px")
                 , ("height", "50px")
                 , ("border-radius", "25px")
                 , ("background-color", color owner)
+                , ("box-shadow", "1px 1px 1px 1px #00A inset, 1px 1px 1px 1px #33F")
                 ]
         eltOfOwner owner =
             Html.div
@@ -103,15 +101,41 @@ view model =
         combineAcross owner acc =
             eltOfOwner owner::acc
         conbineDown rowList acc =
-            Html.div [rowStyle] rowList::acc
+            Html.div [] rowList::acc
         boardElts =
             Grid.foldRightTop combineAcross conbineDown [] [] model.board
         boardElt =
-            Html.div [] boardElts
+            Html.div
+                [ style
+                    [ ("padding", "5px")
+                    , ("background", "blue")
+                    , ("box-shadow", "3px 3px 16px 4px #007")
+                    , ("margin", "10px 0px")
+                    , ("display", "inline-block")
+                    ]
+                ]
+                boardElts
+
+        restartButton =
+            Html.div []
+                [ Html.button 
+                    [ onClick Restart
+                    , style [("display", "block"), ("margin", "4px 0px")]
+                    ]
+                    [Html.text "Restart"]
+                ]
     in
         Html.div
-            []
-            [header, buttons, boardElt]
+            [ style
+                [ ("text-align", "center")
+                , ("display", "flex")
+                , ("flex-direction", "column")
+                , ("align-items", "center")
+                , ("background", "#ABC")
+                , ("padding", "20px 100px 300px 100px")
+                ]
+            ]
+            [ Html.div [] [header, buttons, boardElt, restartButton]]
 
 newBoard : Board
 newBoard =
