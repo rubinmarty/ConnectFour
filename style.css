@@ -1,0 +1,50 @@
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #ABC;
+    min-height: 100%;
+    padding: 0 15%;
+}
+
+#content-widget {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+}
+
+table#board {
+    padding: 5px;
+    background: blue;
+    box-shadow: rgb(0, 0, 119) 3px 3px 16px 4px;
+}
+
+#reset-button {
+    align-self: start;
+    margin: 15px 0;
+}
+
+.circle {
+    padding-top: 100%;
+    border-radius: 50%;
+    background-color: #ABC;
+    box-shadow: -1px -1px 1px 2px #115;
+}
+
+.circle.red {
+    background-color: red;
+}
+
+.circle.yellow {
+    background-color: yellow;
+}
+
+.circle.not-winning {
+    box-shadow: -1px -1px 1px 2px #115, inset 0 0 0 100px rgba(0,0,0,.5);
+}
+
+.highlighted {
+    background-color: #2FE;
+}
